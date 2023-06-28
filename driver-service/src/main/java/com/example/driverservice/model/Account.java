@@ -26,7 +26,4 @@ public class Account {
 
     @Column(name = "blue_dollar_balance")
     private BigDecimal blueDollarBalance;
-
-    @OneToOne(mappedBy = "account")
-    private Driver driver;
 }

@@ -1,0 +1,2 @@
+insert into drivers (id, name, passport, category, birthday, experience) values
+                                                                             (99, 'test', 'passport', 'B', '2019-08-09', 3);

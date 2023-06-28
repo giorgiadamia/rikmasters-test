@@ -2,8 +2,8 @@ package com.example.driverservice.service;
 
 import com.example.driverservice.exception.BadArgumentException;
 import com.example.driverservice.exception.ResourceNotFoundException;
-import com.example.driverservice.model.domain.Account;
-import com.example.driverservice.model.domain.Driver;
+import com.example.driverservice.model.Account;
+import com.example.driverservice.model.Driver;
 import com.example.driverservice.repository.DriverRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

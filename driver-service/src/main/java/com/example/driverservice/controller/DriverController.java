@@ -1,6 +1,6 @@
 package com.example.driverservice.controller;
 
-import com.example.driverservice.model.domain.Driver;
+import com.example.driverservice.model.Driver;
 import com.example.driverservice.service.DriverService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

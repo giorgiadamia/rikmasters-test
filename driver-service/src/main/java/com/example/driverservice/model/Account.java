@@ -1,4 +1,4 @@
-package com.example.driverservice.model.domain;
+package com.example.driverservice.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

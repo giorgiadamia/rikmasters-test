@@ -1,11 +1,15 @@
 package com.example.carservice.service;
 
 import com.example.carservice.model.Car;
+import com.example.carservice.model.dto.DriverResponse;
 import com.example.carservice.repository.CarRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
@@ -14,9 +18,21 @@ import java.util.Optional;
 public class CarService {
 
     private final CarRepository carRepository;
+    private final WebClient webClient;
 
+    @Transactional
     public void createCar(Car car) {
-        // webflux to driverservice to check driver id
+        if (car.getDriver() != null) {
+            Long driverId = car.getDriver();
+
+            webClient.get()
+                    .uri("http://localhost:8080/api/v1/driver" + "/" + driverId)
+                    .retrieve()
+                    .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> Mono.error(new EntityNotFoundException("Driver with this id doesnt exits")))
+                    .bodyToMono(DriverResponse.class)
+                    .block();
+        }
+
         carRepository.save(car);
     }
 
@@ -53,7 +69,14 @@ public class CarService {
         }
 
         if (car.getDriver() != null) {
-            // webflux
+            Long driverId = car.getDriver();
+
+            webClient.get()
+                    .uri("http://localhost:8080/api/v1/driver" + "/" + driverId)
+                    .retrieve()
+                    .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> Mono.error(new EntityNotFoundException("Driver with this id doesnt exits")))
+                    .bodyToMono(DriverResponse.class)
+                    .block();
             carFromMemory.setDriver(car.getDriver());
         }
 

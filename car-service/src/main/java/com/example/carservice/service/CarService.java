@@ -5,6 +5,8 @@ import com.example.carservice.model.dto.DriverResponse;
 import com.example.carservice.repository.CarRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -112,5 +114,9 @@ public class CarService {
             throw new EntityNotFoundException("There is no car with this id");
         }
         return carOptional.get();
+    }
+
+    public Page<Car> getAllCars(Pageable pageable) {
+        return carRepository.findAll(pageable);
     }
 }

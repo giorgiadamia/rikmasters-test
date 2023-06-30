@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -72,6 +74,19 @@ public class CarController {
 
         ApiResponse response = new ApiResponse();
         response.setMessage("Driver successfully set to car");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<ApiResponse> getAllCars(@RequestParam(defaultValue = "0") int page,
+                                                     @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page,size);
+
+        ApiResponse response = new ApiResponse();
+
+        response.setObject(carService.getAllCars(pageable));
+        response.setMessage("Cars successfully extracted");
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

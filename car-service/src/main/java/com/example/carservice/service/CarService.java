@@ -28,7 +28,8 @@ public class CarService {
             webClient.get()
                     .uri("http://localhost:8080/api/v1/driver" + "/" + driverId)
                     .retrieve()
-                    .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> Mono.error(new EntityNotFoundException("Driver with this id doesnt exits")))
+                    .onStatus(HttpStatusCode::is4xxClientError,
+                            clientResponse -> Mono.error(new EntityNotFoundException("Driver with this id doesnt exits")))
                     .bodyToMono(DriverResponse.class)
                     .block();
         }
@@ -74,7 +75,8 @@ public class CarService {
             webClient.get()
                     .uri("http://localhost:8080/api/v1/driver" + "/" + driverId)
                     .retrieve()
-                    .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> Mono.error(new EntityNotFoundException("Driver with this id doesnt exits")))
+                    .onStatus(HttpStatusCode::is4xxClientError,
+                            clientResponse -> Mono.error(new EntityNotFoundException("Driver with this id doesnt exits")))
                     .bodyToMono(DriverResponse.class)
                     .block();
             carFromMemory.setDriver(car.getDriver());
@@ -85,6 +87,22 @@ public class CarService {
 
     public void deleteCar(Long id) {
         carRepository.delete(carCheck(id));
+    }
+
+    @Transactional
+    public void setDriver(Long id, Long driverId) {
+        Car carFromMemory = carCheck(id);
+
+        webClient.get()
+                .uri("http://localhost:8080/api/v1/driver" + "/" + driverId)
+                .retrieve()
+                .onStatus(HttpStatusCode::is4xxClientError,
+                        clientResponse -> Mono.error(new EntityNotFoundException("Driver with this id doesnt exits")))
+                .bodyToMono(DriverResponse.class)
+                .block();
+        carFromMemory.setDriver(driverId);
+
+        carRepository.save(carFromMemory);
     }
 
     private Car carCheck(Long id) {

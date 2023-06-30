@@ -56,4 +56,15 @@ public class CarController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @PutMapping("/{id}/driver/{driverId}")
+    public ResponseEntity<ApiResponse> setDriver(@PathVariable Long id,
+                                                 @PathVariable Long driverId) {
+        carService.setDriver(id, driverId);
+
+        ApiResponse response = new ApiResponse();
+        response.setMessage("Driver successfully set to car");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

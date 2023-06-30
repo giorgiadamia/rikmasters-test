@@ -7,6 +7,7 @@ import com.example.driverservice.model.Driver;
 import com.example.driverservice.repository.DriverRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -37,6 +38,7 @@ public class DriverService {
         return driverCheck(id);
     }
 
+    @Transactional
     public void updateDriver(Long id, Driver driver) {
         Driver driverFromMemory = driverCheck(id);
 

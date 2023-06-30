@@ -26,7 +26,7 @@ public class CarService {
             Long driverId = car.getDriver();
 
             webClient.get()
-                    .uri("http://localhost:8080/api/v1/driver" + "/" + driverId)
+                    .uri("http://localhost:8082/api/v1/driver" + "/" + driverId)
                     .retrieve()
                     .onStatus(HttpStatusCode::is4xxClientError,
                             clientResponse -> Mono.error(new EntityNotFoundException("Driver with this id doesnt exits")))
@@ -73,7 +73,7 @@ public class CarService {
             Long driverId = car.getDriver();
 
             webClient.get()
-                    .uri("http://localhost:8080/api/v1/driver" + "/" + driverId)
+                    .uri("http://localhost:8082/api/v1/driver" + "/" + driverId)
                     .retrieve()
                     .onStatus(HttpStatusCode::is4xxClientError,
                             clientResponse -> Mono.error(new EntityNotFoundException("Driver with this id doesnt exits")))
@@ -94,7 +94,7 @@ public class CarService {
         Car carFromMemory = carCheck(id);
 
         webClient.get()
-                .uri("http://localhost:8080/api/v1/driver" + "/" + driverId)
+                .uri("http://localhost:8082/api/v1/driver" + "/" + driverId)
                 .retrieve()
                 .onStatus(HttpStatusCode::is4xxClientError,
                         clientResponse -> Mono.error(new EntityNotFoundException("Driver with this id doesnt exits")))

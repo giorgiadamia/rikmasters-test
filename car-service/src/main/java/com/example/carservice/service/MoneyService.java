@@ -24,7 +24,7 @@ public class MoneyService {
         requestBody.put("red_dollar_balance", amount);
 
         webClient.put()
-                .uri("http://localhost:8080/api/v1/account/" + driverId + "/red/sub")
+                .uri("http://localhost:8082/api/v1/account/" + driverId + "/red/sub")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(requestBody))
                 .retrieve()
@@ -39,7 +39,7 @@ public class MoneyService {
         requestBody.put("red_dollar_balance", amount);
 
         webClient.put()
-                .uri("http://localhost:8080/api/v1/account/" + driverId + "/red/add")
+                .uri("http://localhost:8082/api/v1/account/" + driverId + "/red/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(requestBody))
                 .retrieve()
@@ -54,7 +54,7 @@ public class MoneyService {
         requestBody.put("blue_dollar_balance", amount);
 
         webClient.put()
-                .uri("http://localhost:8080/api/v1/account/" + driverId + "/blue/sub")
+                .uri("http://localhost:8082/api/v1/account/" + driverId + "/blue/sub")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(requestBody))
                 .retrieve()
@@ -69,7 +69,7 @@ public class MoneyService {
         requestBody.put("blue_dollar_balance", amount);
 
         webClient.put()
-                .uri("http://localhost:8080/api/v1/account/" + driverId + "/blue/add")
+                .uri("http://localhost:8082/api/v1/account/" + driverId + "/blue/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(requestBody))
                 .retrieve()
@@ -84,7 +84,7 @@ public class MoneyService {
         requestBody.put("green_dollar_balance", amount);
 
         webClient.put()
-                .uri("http://localhost:8080/api/v1/account/" + driverId + "/green/sub")
+                .uri("http://localhost:8082/api/v1/account/" + driverId + "/green/sub")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(requestBody))
                 .retrieve()
@@ -99,7 +99,7 @@ public class MoneyService {
         requestBody.put("green_dollar_balance", amount);
 
         webClient.put()
-                .uri("http://localhost:8080/api/v1/account/" + driverId + "/green/add")
+                .uri("http://localhost:8082/api/v1/account/" + driverId + "/green/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromValue(requestBody))
                 .retrieve()

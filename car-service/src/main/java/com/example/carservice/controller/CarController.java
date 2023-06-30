@@ -3,6 +3,8 @@ package com.example.carservice.controller;
 import com.example.carservice.model.Car;
 import com.example.carservice.model.dto.ApiResponse;
 import com.example.carservice.service.CarService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,11 +14,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v2/car")
 @RequiredArgsConstructor
+@Tag(name = "Car Controller", description = "Car API")
 public class CarController {
 
     private final CarService carService;
 
     @PostMapping
+    @Operation(summary = "Create car")
     public ResponseEntity<ApiResponse> createCar(@RequestBody @Valid Car car) {
         carService.createCar(car);
 
@@ -27,6 +31,7 @@ public class CarController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get car by id")
     public ResponseEntity<ApiResponse> getCar(@PathVariable Long id) {
         ApiResponse response = new ApiResponse();
         response.setMessage("Successfully get car by id");
@@ -37,6 +42,7 @@ public class CarController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Update car")
     public ResponseEntity<ApiResponse> updateCar(@PathVariable Long id,
                                                  @RequestBody Car car) {
         carService.updateCar(id, car);
@@ -48,6 +54,7 @@ public class CarController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete car")
     public ResponseEntity<ApiResponse> deleteCar(@PathVariable Long id) {
         carService.deleteCar(id);
 
@@ -58,6 +65,7 @@ public class CarController {
     }
 
     @PutMapping("/{id}/driver/{driverId}")
+    @Operation(summary = "Driver selection for the car")
     public ResponseEntity<ApiResponse> setDriver(@PathVariable Long id,
                                                  @PathVariable Long driverId) {
         carService.setDriver(id, driverId);

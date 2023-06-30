@@ -79,9 +79,10 @@ public class CarController {
     }
 
     @GetMapping("/all")
+    @Operation(summary = "Get all cars")
     public ResponseEntity<ApiResponse> getAllCars(@RequestParam(defaultValue = "0") int page,
-                                                     @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page,size);
+                                                  @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
         ApiResponse response = new ApiResponse();
 
